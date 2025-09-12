@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Principal;
 
-namespace ShaheemsDinerLibrary.Model
+namespace ShaheemsDinerLibrary.Model;
+
+public class FoodModel
 {
-    class FoodModel
-    {
-    }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public decimal Price { get; set; }
 }

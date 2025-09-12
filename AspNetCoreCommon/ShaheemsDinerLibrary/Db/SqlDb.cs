@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace ShaheemsDinerLibrary.Db;
 
@@ -15,22 +16,24 @@ public class SqlDb : IDataAccess
         this.config = config;
     }
 
-    public List<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName, bool isStoreProcedure)
+    public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
     {
         var connectionString = config.GetConnectionString(connectionStringName);
 
         using (IDbConnection db = new SqlConnection(connectionString))
         {
-            return db.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure).ToList();
+            var rows = await db.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+
+            return rows.ToList();
         }
     }
 
-    public void SaveData<T>(string StoredProcedure, T parameters, string connectionStringName)
+    public async Task<int> SaveData<T>(string StoredProcedure, T parameters, string connectionStringName)
     {
         var connectionString = config.GetConnectionString(connectionStringName);
         using (IDbConnection db = new SqlConnection(connectionString))
         {
-            db.Execute(StoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+            return await db.ExecuteAsync(StoredProcedure, parameters, commandType: CommandType.StoredProcedure);
         }
     }
 }

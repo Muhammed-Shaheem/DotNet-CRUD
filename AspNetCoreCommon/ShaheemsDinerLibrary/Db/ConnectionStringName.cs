@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ShaheemsDinerLibrary.Db;
 
-namespace ShaheemsDinerLibrary.Db
+public class ConnectionStringName
 {
-    class ConnectionStringName
-    {
-    }
+    public string SqlConnection { get; set; } = "Default";
 }
