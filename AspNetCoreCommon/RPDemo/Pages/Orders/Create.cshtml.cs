@@ -55,6 +55,6 @@ public class CreateModel : PageModel
         Order.Total = Order.Quantity * price;  
         int id = await orderData.CreateOrder(Order);
 
-        return RedirectToPage("./Create");
+        return RedirectToPage("./Display", new {Id = id});
     }
 }
