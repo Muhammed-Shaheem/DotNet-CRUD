@@ -22,7 +22,7 @@ public class SqlDb : IDataAccess
 
         using (IDbConnection db = new SqlConnection(connectionString))
         {
-            var rows = await db.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            var rows = await db.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure) ;
 
             return rows.ToList();
         }

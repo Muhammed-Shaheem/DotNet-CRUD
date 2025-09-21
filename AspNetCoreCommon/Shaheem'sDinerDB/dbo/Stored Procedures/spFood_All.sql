@@ -3,6 +3,6 @@
 AS
 begin
 set nocount on
-	SELECT [Id], [Title], [Description], [Price ]
+	SELECT [Id], [Title], [Description], [Price]
 	from Food;
 end

@@ -28,7 +28,7 @@ public class OrderData : IOrderData
         p.Add("total", order.Total);
         p.Add("id", DbType.Int32, direction: ParameterDirection.Output);
 
-        await dataAccess.SaveData("spOrdersInsert", p, connectionStringName.SqlConnection);
+        await dataAccess.SaveData("spOrders_Insert", p, connectionStringName.SqlConnection);
 
         return p.Get<int>("id");
     }

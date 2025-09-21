@@ -19,7 +19,7 @@ public class FoodData : IFoodData
         return dataAccess.LoadData<FoodModel, dynamic>("spFood_All", new { }, connectionStringName.SqlConnection);
     }
 
-    public void
+  
 
 
 }
