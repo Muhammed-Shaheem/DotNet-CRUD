@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using RPDemo.Models;
 using ShaheemsDinerLibrary.Data;
 using ShaheemsDinerLibrary.Model;
 using System.Threading.Tasks;
@@ -17,9 +18,9 @@ public class DisplayModel : PageModel
     public int Id { get; set; }
     public string? ItemPurchased { get; set; }
 
-    public OrderModel? Order { get; set; };
+    public OrderModel? Order { get; set; }
     [BindProperty]
-    public int FoodId { get; set; }
+    public UpdateOrderName UpdateOrder { get; set; }
     public DisplayModel(IFoodData foodData, IOrderData orderData)
     {
         this.foodData = foodData;
@@ -28,7 +29,7 @@ public class DisplayModel : PageModel
 
     public async Task<IActionResult> OnGet()
     {
-        Order = await orderData.GetOrderId(Id);
+        Order = await orderData.GetOrderById(Id);
 
         if (Order is not null)
         {
@@ -36,17 +37,14 @@ public class DisplayModel : PageModel
 
             ItemPurchased = food.Where(x => x.Id == Order.FoodId).FirstOrDefault()?.Title;
         }
-        var foods = await foodData.GetFood();
-        foreach (var food in foods)
-        {
-            foodList.Add(new SelectListItem { Text = food.Title, Value = food.Id.ToString() });
-        }
+
+        
         return Page();
     }
 
     public async Task<IActionResult> OnPost()
     {
-        await orderData.UpdateOrderName(FoodId, Order.OrderName);
-        return RedirectToPage("./Display", new { Id = Id });
+        await orderData.UpdateOrderName(UpdateOrder.OrderId,UpdateOrder.OrderName);
+        return RedirectToPage("./Display", new { Id });
     }
 }

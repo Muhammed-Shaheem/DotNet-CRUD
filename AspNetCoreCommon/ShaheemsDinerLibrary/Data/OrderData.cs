@@ -44,7 +44,7 @@ public class OrderData : IOrderData
 
     }
 
-    public async Task<OrderModel?> GetOrderId(int id)
+    public async Task<OrderModel?> GetOrderById(int id)
     {
         List<OrderModel> rows = await dataAccess.LoadData<OrderModel, dynamic>("spOrders_GetById", new { id }, connectionStringName.SqlConnection);
         return rows.FirstOrDefault();

@@ -37,11 +37,14 @@
 
         <form method="post">
             <div class="form-group">
-                <label class="control-label" asp-for="Order.FoodId"></label>
-                <select class="form-control" asp-for="FoodId" asp-items="Model.foodList"></select>
-                <span asp-validation-for="Order.FoodId" class="text-danger"></span>
+                <label asp-for="@Model.UpdateOrder.OrderName" class="control-label"></label>
+                <input asp-for="@Model.UpdateOrder.OrderName" class="form-control" value="@Model.Order.OrderName" />
+                <span asp-validation-for="@Model.UpdateOrder.OrderName" class="text-danger"></span>
             </div>
-            <button class="btn-primary btn mt-2" type="submit">Submit</button>
+
+            <input type="hidden" asp-for="@Model.UpdateOrder.OrderId" value="@Model.Order.Id" />
+
+            <button class="btn-primary btn mt-2" type="submit">Update Order Name</button>
         </form>
     }
 

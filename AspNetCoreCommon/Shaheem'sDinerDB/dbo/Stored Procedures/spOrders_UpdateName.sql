@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spOrders_UpdateName]
+﻿	CREATE PROCEDURE [dbo].[spOrders_UpdateName]
 	@id int,
 	@orderName nvarchar(50)
 	
