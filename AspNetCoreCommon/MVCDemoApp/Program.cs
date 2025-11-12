@@ -1,15 +1,23 @@
+using ShaheemsDinerLibrary.Data;
+using ShaheemsDinerLibrary.Db;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IDataAccess, SqlDb>();
+builder.Services.AddTransient<IFoodData, FoodData>();
+builder.Services.AddTransient<IOrderData, OrderData>();
+builder.Services.AddSingleton(new ConnectionStringName
+{
+    SqlConnection = "Default"
+});
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -22,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Orders}/{action=Create}/{id?}");
 
 app.Run();
