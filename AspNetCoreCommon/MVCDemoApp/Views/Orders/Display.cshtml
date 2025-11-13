@@ -1,0 +1,55 @@
+﻿@model MVCDemoApp.Models.DisplayOrderModel
+
+@{
+    ViewData["Title"] = "Display";
+}
+
+<h1>Display</h1>
+@{
+    if (Model.Order is null)
+    {
+        <h4>The requested record not found.</h4>
+    }
+    else
+    {
+        <table class="table">
+
+            <tbody>
+                <tr>
+                    <td><strong>Order Name</strong></td>
+                    <td>@Model.Order.OrderName</td>
+                </tr>
+                <tr>
+                    <td><strong>Order Date</strong></td>
+                    <td>@Model.Order.OrderDate</td>
+                </tr>
+                <tr>
+                    <td><strong>Order Total</strong></td>
+                    <td>@string.Format("{0:C}", Model.Order.Total)</td>
+                </tr>
+                <tr>
+                    <td><strong>Item Ordered</strong></td>
+                    <td>@Model.ItemPurchased</td>
+                </tr>
+                <tr>
+                    <td><strong>Quantity</strong></td>
+                    <td>@Model.Order.Quantity</td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+        // <form method="post">
+        //     <div class="form-group">
+        //         <label asp-for="@Model.OrderName" class="control-label"></label>
+        //         <input asp-for="@Model.OrderName" class="form-control" value="@Model.Order.OrderName" />
+        //         <span asp-validation-for="@Model.UpdateOrder.OrderName" class="text-danger"></span>
+        //     </div>
+
+        //     <input type="hidden" asp-for="@Model.UpdateOrder.OrderId" value="@Model.Order.Id" />
+
+        //     <button class="btn-primary btn mt-2" type="submit">Update Order Name</button>
+        // </form>
+    }
+
+}

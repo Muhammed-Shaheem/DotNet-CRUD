@@ -47,9 +47,26 @@ namespace MVCDemoApp.Controllers
 
             int id = await orderData.CreateOrder(order);
 
-            return RedirectToAction("Create"); 
+            return RedirectToAction("Display", new { Id = id }); 
         }
 
+        public async Task<IActionResult> Display(int Id)
+        {
+            var order = new DisplayOrderModel();
+            order.Order = await orderData.GetOrderById(Id);
+
+            if (order.Order is not null)
+            {
+                var food = await foodData.GetFood();
+
+                order.ItemPurchased = food.Where(x => x.Id == order.Order.FoodId).FirstOrDefault()?.Title;
+            }
+
+
+            return View();
+        }
 
     }
+
+ 
 }
