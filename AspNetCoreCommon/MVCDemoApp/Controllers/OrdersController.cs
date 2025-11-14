@@ -66,6 +66,28 @@ namespace MVCDemoApp.Controllers
             return View(order);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, string orderName)
+        {
+            await orderData.UpdateOrderName(id,orderName);
+            return RedirectToAction("Display", new { Id =id});
+        }
+
+        public async Task<IActionResult> Delete(int Id)
+        {
+            OrderModel order = await orderData.GetOrderById(Id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int Id,string temp=null)
+        {
+            await orderData.DeletOrder(Id);
+
+            return RedirectToAction("Delete");
+
+        }
+
     }
 
  

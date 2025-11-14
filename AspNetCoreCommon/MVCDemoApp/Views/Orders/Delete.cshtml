@@ -1,0 +1,23 @@
+﻿@model ShaheemsDinerLibrary.Model.OrderModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+
+@if (Model is null)
+{
+    <h4>Requested record was not found.</h4>
+}
+
+else
+{
+    <div class="h4">
+        Do you want to delete this order placed on @Model.OrderDate?
+    </div>
+    <form method="post">
+        <input name="Id" value="@Model.Id" type="hidden" />
+        <button asp-action="Delete" type="submit" class="btn-primary btn btn-danger mt-4">Delete Order</button>
+    </form>
+}
