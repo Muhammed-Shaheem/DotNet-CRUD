@@ -80,9 +80,9 @@ namespace MVCDemoApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int Id,string temp=null)
+        public async Task<IActionResult> Delete(OrderModel order)
         {
-            await orderData.DeletOrder(Id);
+            await orderData.DeletOrder(order.Id);
 
             return RedirectToAction("Delete");
 
