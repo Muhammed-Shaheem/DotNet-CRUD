@@ -1,3 +1,6 @@
+using ShaheemsDinerLibrary.Data;
+using ShaheemsDinerLibrary.Db;
+
 namespace ApiDemo
 {
     public class Program
@@ -6,16 +9,21 @@ namespace ApiDemo
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<IOrderData, OrderData>();
+            builder.Services.AddSingleton<IFoodData, FoodData>();
+            builder.Services.AddSingleton<IDataAccess, SqlDb>();
+            builder.Services.AddSingleton(new ConnectionStringName
+            {
+                SqlConnection = "Default"
+            });
+
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
