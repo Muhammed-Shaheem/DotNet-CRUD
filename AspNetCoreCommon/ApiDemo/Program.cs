@@ -20,6 +20,12 @@ namespace ApiDemo
             {
                 SqlConnection = "Default"
             });
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+            });
 
 
             var app = builder.Build();
@@ -34,7 +40,7 @@ namespace ApiDemo
 
             app.UseAuthorization();
 
-
+            app.UseCors("AllowOrigin");
             app.MapControllers();
 
             app.Run();
