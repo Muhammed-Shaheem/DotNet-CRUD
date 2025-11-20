@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiDemo.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShaheemsDinerLibrary.Data;
 using ShaheemsDinerLibrary.Model;
@@ -65,6 +66,16 @@ namespace ApiDemo.Controllers
             {
                 return NotFound(); 
             }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Put([FromBody]OrderUpdateModel data)
+        {
+            await orderData.UpdateOrderName(data.Id, data.OrderName);
+
+            return Ok();
         }
     }
 }
