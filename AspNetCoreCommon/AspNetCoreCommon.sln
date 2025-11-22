@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCDemo", "MVCDemoApp\MVCDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDemo", "ApiDemo\ApiDemo.csproj", "{F34BB8B7-2C3C-480A-9242-82F11EA607B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerDemo", "BlazorServerDemo\BlazorServerDemo.csproj", "{086BF225-2976-4114-AFC9-81131B81FE1B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{F34BB8B7-2C3C-480A-9242-82F11EA607B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F34BB8B7-2C3C-480A-9242-82F11EA607B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F34BB8B7-2C3C-480A-9242-82F11EA607B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086BF225-2976-4114-AFC9-81131B81FE1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086BF225-2976-4114-AFC9-81131B81FE1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086BF225-2976-4114-AFC9-81131B81FE1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086BF225-2976-4114-AFC9-81131B81FE1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
