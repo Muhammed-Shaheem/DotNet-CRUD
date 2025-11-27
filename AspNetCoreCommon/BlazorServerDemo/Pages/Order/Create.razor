@@ -1,0 +1,73 @@
+﻿@page "/Order/Create"
+
+
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using ShaheemsDinerLibrary.Model
+@inject IFoodData foodData
+@inject IOrderData orderData
+
+<h3>Create</h3>
+<EditForm Model="@Order" OnValidSubmit="HandleValidsubmit">
+    <div class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label class="control-label">Item to order</label>
+            <select @onchange="FoodItemChange" class="form-control">
+                <option value="">Select a meal...</option>
+                @foreach (var item in foodItems)
+                {
+                    <option value="@item.Id">@item.Title</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Quantity</label>
+            <InputNumber @bind-Value="Order.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => @Order.Quantity)" class="text-danger" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Order Name</label>
+            <InputText @bind-Value="@Order.OrderName" class="form-control" />
+            <ValidationMessage For="@(() => @Order.OrderName)" class="text-danger" />
+
+        </div>
+
+        <button class="btn-primary btn mt-2" type="submit">Submit</button>
+
+    </div>
+</EditForm>
+
+@code {
+    private OrderModel Order = new();
+    private List<FoodModel> foodItems = new();
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        foodItems = await foodData.GetFood();
+    }
+    private async Task HandleValidsubmit()
+    {
+        Order.Total = Order.Quantity * foodItems.Where(x=> x.Id == Order.FoodId).First().Price;
+        int id = await orderData.CreateOrder(Order);
+
+        Order = new();
+
+
+    }
+    private void FoodItemChange(ChangeEventArgs args)
+    {
+        if (string.IsNullOrWhiteSpace(args.Value.ToString()) == false)
+        {
+            Order.FoodId = int.Parse(args.Value.ToString());
+        }
+        else
+        {
+            Order.FoodId = 0;
+        }
+    }
+}
