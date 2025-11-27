@@ -1,0 +1,35 @@
+﻿@page "/Food/List"
+@using ShaheemsDinerLibrary.Model
+@inject IFoodData foodData
+
+<h3>List</h3>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in foodList)
+        {
+            <tr>
+
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@string.Format("{0:C}", item.Price)</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<FoodModel> foodList = new();
+    protected override async Task OnInitializedAsync()
+    {
+        foodList = await foodData.GetFood();
+    }
+}
