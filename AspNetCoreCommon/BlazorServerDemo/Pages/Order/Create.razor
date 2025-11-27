@@ -6,6 +6,8 @@
 @using ShaheemsDinerLibrary.Model
 @inject IFoodData foodData
 @inject IOrderData orderData
+@inject NavigationManager navigationManager
+
 
 <h3>Create</h3>
 <EditForm Model="@Order" OnValidSubmit="HandleValidsubmit">
@@ -55,7 +57,7 @@
         Order.Total = Order.Quantity * foodItems.Where(x=> x.Id == Order.FoodId).First().Price;
         int id = await orderData.CreateOrder(Order);
 
-        Order = new();
+        navigationManager.NavigateTo($"order/display/{id}");
 
 
     }
